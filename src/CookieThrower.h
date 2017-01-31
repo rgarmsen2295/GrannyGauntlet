@@ -20,6 +20,8 @@ public:
     // checks for user input and throws a Cookie
     void pollAndThrow(double deltaTime, double totalTime);
 
+    void draw();
+
 private:
     AimInputComponent* aimInputComponent;
     std::shared_ptr<Shape> cookieShape;

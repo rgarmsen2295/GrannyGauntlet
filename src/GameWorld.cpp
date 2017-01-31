@@ -4,10 +4,13 @@
 #include "CookieThrower.h"
 #include <glm/gtx/rotate_vector.hpp>
 
+static CookieThrower* cookieThrower;
+
 GameWorld::GameWorld()
 	: updateCount(0),
 	renderCount(0),
 	numBunniesHit(0) {
+	cookieThrower = new CookieThrower();
 
 	// Seed the PRNG with the current time for any random elements in the world
 	std::srand(std::time(NULL));
@@ -64,7 +67,6 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-    static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);
 
 	for (GameObject* obj : this->dynamicGameObjects_) {
@@ -105,6 +107,8 @@ void GameWorld::drawGameObjects() {
 	for (GameObject *obj : this->staticGameObjects_) {
 		obj->draw(P, M, V);
 	}
+
+	cookieThrower->draw();
 
 	renderCount++;
 }

@@ -238,6 +238,11 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+	// Load simple line shader
+	if (shaderManager.createIsomorphicShader(resourceManager, "SuperSimple", "superSimple") == 0) {
+		return EXIT_FAILURE;
+	}
+
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
    PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,

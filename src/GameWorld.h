@@ -76,6 +76,7 @@ public:
 	void registerBunnyHit();
 
 private:
+
 	// Collection of GameObjects in the world
 	std::vector<GameObject*> dynamicGameObjects_;
 
