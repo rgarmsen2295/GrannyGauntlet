@@ -156,7 +156,7 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		float specularValue = 0.0;
 		if (lightNormalDot != 0.0 && viewNormalDot != 0.0) {
 			// Calculate the half-vector between the light vector and the view vector
-			vec3 halfVec = normalize(lightDir + view);
+			vec3 halfVec = normalize((lightDir + view) / 2.0);
 
 			// Calculate the three primary physically-based terms for getting the specular value
 			float fresnel = calcFresnel(halfVec, view);
