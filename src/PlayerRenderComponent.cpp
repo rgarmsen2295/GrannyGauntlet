@@ -21,3 +21,8 @@ void PlayerRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
     ShaderManager& shaderManager = ShaderManager::instance();
     shaderManager.renderShadowPass(holder_, shape_, M);
 }
+
+void PlayerRenderComponent::renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	shaderManager.renderAmbientOcclusionPass(holder_, shape_, P, V, M);
+}

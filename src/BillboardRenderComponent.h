@@ -16,6 +16,8 @@ public:
 
 	void renderShadow(std::shared_ptr<MatrixStack> M);
 
+	void renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
+
 private:
 
 	std::shared_ptr<Texture> billboardTexture_;

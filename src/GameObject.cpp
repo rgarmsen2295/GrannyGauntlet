@@ -183,6 +183,12 @@ void GameObject::renderToShadowMap(std::shared_ptr <MatrixStack> M) {
 	}
 }
 
+void GameObject::renderToScreenSpaceDepthMap(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	if (render_ != NULL) {
+		render_->renderScreenDepth(P, M, V);
+	}
+}
+
 void GameObject::performAction(double deltaTime, double totalTime) {
     if (action_ != NULL) {
         action_->checkAndPerformAction(deltaTime, totalTime);

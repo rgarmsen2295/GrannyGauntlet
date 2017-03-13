@@ -95,6 +95,9 @@ public:
 	// Renders all GameObjects to the shadow map
 	void renderShadowMap();
 
+	// Renders all GameObjects to the AO depth map
+	void GameWorld::renderScreenDepthMap(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
+
    // Draws a small view port to see view frustum culling
    void drawVFCViewport();
 

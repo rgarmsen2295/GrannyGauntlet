@@ -1,6 +1,7 @@
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
 
+#include "AmbientOcclusion.h"
 #include "Camera.h"
 #include "GameWorld.h"
 #include "ViewFrustum.h"
@@ -63,8 +64,14 @@ public:
 	// set a Shadow Map Object
 	void setShadowMap(ShadowMap* shadowMap);
 
+	// Sets the game's AmbientOcclusion object
+	void setAmbientOcclusion(std::shared_ptr<AmbientOcclusion> ambientOcclusion);
+
 	// Returns the Shadow Map object
 	ShadowMap* getShadowMap();
+
+	// Returns the current AmbientOcclusion object being used by the game's render logic
+	std::shared_ptr<AmbientOcclusion> getAmbientOcclusion();
 
     static constexpr float cullFarPlane = 100.0;
     static constexpr float camFarPlane = 300.0;
@@ -83,6 +90,8 @@ private:
    ViewFrustum* currentViewFrustum_;
 
 	ShadowMap* shadowMap_;
+
+	std::shared_ptr<AmbientOcclusion> ambientOcclusion_;
 
 	float score_ = 0.0;
 

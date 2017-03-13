@@ -10,8 +10,6 @@ WindowManager& WindowManager::instance() {
 	return *instance;
 }
 
-int initializeGLFW(GLFWwindow** window);
-
 int WindowManager::initialize() {
 	// Initialize boilerplate glfw, etc. code and check for failure
     if (initializeGLFW() == -1) {

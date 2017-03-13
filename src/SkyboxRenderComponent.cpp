@@ -22,3 +22,7 @@ void SkyboxRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr
 void SkyboxRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
     // don't do anything, there is no shadow on the skybox
 }
+
+void SkyboxRenderComponent::renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	// No AO on skybox
+}

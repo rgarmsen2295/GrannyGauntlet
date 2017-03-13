@@ -90,6 +90,10 @@ int main(int argc, char **argv) {
     ShadowMap* shadowMap = new ShadowMap();
     gameManager.setShadowMap(shadowMap);
 
+	// Set the Ambient Occlusion Object
+	std::shared_ptr<AmbientOcclusion> ambientOcclusion = std::make_shared<AmbientOcclusion>();
+	gameManager.setAmbientOcclusion(ambientOcclusion);
+
     // Add all static objects before this!!!
     world.init();
 

@@ -165,6 +165,9 @@ void GameWorld::drawGameObjects() {
    // Calculate view frustum planes
    viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
+   // Calculate screen space depth map used for AO
+   renderScreenDepthMap(P, M, V);
+
 	// Draw non-static objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
       if (!viewFrustum.cull(obj)) {
@@ -200,6 +203,20 @@ void GameWorld::renderShadowMap() {
     for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
             obj->renderToShadowMap(M);
     }
+}
+
+void GameWorld::renderScreenDepthMap(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	GameManager::instance().getAmbientOcclusion()->bindForScreenDepthPass();
+
+	// Draw non-static objects
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
+		obj->renderToShadowMap(M);
+	}
+
+	// Draw static objects
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+		obj->renderToShadowMap(M);
+	}
 }
 
 // For debugging view frustum culling. This is mostly magic.

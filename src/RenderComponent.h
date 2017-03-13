@@ -36,6 +36,9 @@ public:
     // Renders the depht of the object to the shadow map
     virtual void renderShadow(std::shared_ptr<MatrixStack> M) = 0;
 
+	// Renders the depth of the object to the screen depth map
+	virtual void renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) = 0;
+
 	inline void changeShader(const std::string& newShaderName) { shaderName_ = newShaderName; }
 
 protected:

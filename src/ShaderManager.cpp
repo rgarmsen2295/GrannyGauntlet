@@ -325,6 +325,39 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 	}
 }
 
+void ShaderManager::renderAmbientOcclusionPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
+	std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
+	if (objToRender != NULL) {
+
+		const std::shared_ptr<Program> shaderProgram = bindShader(ShaderManager::ambientOcclusionDepthPassName);
+
+		// Set up lights
+		GameManager& gameManager = GameManager::instance();
+		GameWorld& gameWorld = gameManager.getGameWorld();
+
+		// Bind perspective and view tranforms
+		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
+
+		// Set up and bind model transform
+		M->pushMatrix();
+		M->loadIdentity();
+
+		M->translate(objToRender->getPosition());
+		M->scale(objToRender->getScale());
+		glm::mat4 rotation = objToRender->transform.getRotate();
+		M->rotateMat4(rotation);
+
+		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+
+		shape->draw(shaderProgram, nullptr);
+
+		M->popMatrix();
+
+		unbindShader();
+	}
+}
+
 glm::mat4 ShaderManager::calculateLightView(std::shared_ptr<Light> light) {
 
     Camera camera = GameManager::instance().getCamera();

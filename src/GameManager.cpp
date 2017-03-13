@@ -67,8 +67,16 @@ void GameManager::setShadowMap(ShadowMap *shadowMap) {
     shadowMap_ = shadowMap;
 }
 
+void GameManager::setAmbientOcclusion(std::shared_ptr<AmbientOcclusion> ambientOcclusion) {
+	ambientOcclusion_ = ambientOcclusion;
+}
+
 ShadowMap* GameManager::getShadowMap() {
     return shadowMap_;
+}
+
+std::shared_ptr<AmbientOcclusion> GameManager::getAmbientOcclusion() {
+	return ambientOcclusion_;
 }
 
 void GameManager::showScore() {

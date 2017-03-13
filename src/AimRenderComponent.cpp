@@ -19,4 +19,7 @@ void AimRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
     // don't do anything, the aim shouldn't create a shadow
 }
 
-
+void AimRenderComponent::renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	shaderManager.renderAmbientOcclusionPass(holder_, shape_, P, V, M);
+}

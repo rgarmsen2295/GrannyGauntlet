@@ -122,6 +122,12 @@ int LevelLoader::parseShaders(json shaders) {
                                                ShaderManager::shadowPassShaderName) == 0) {
          return 1;
       }
+
+	  // Load ambient occlusion shaders
+	  if (shaderManager.createIsomorphicShader(resourceManager, ShaderManager::ambientOcclusionDepthPassName,
+	   ShaderManager::ambientOcclusionDepthPassName) == 0) {
+
+	  }
    }
 
    return 0;

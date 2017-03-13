@@ -77,3 +77,7 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 void BillboardRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
 	// No shadows on billboard effects currently
 }
+
+void BillboardRenderComponent::renderScreenDepth(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+	// No AO on billboard effects currently
+}
