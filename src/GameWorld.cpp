@@ -4,7 +4,6 @@
 #include "CookieActionComponent.h"
 #include "GameManager.h"
 #include "GameWorld.h"
-#include "ViewFrustum.h"
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
@@ -166,7 +165,8 @@ void GameWorld::drawGameObjects() {
    viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
    // Calculate screen space depth map used for AO
-   renderScreenDepthMap(P, M, V);
+   renderScreenDepthMap(viewFrustum, P, M, V);
+   gameManager.getAmbientOcclusion()->bindForDraw();
 
 	// Draw non-static objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
@@ -205,17 +205,21 @@ void GameWorld::renderShadowMap() {
     }
 }
 
-void GameWorld::renderScreenDepthMap(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+void GameWorld::renderScreenDepthMap(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 	GameManager::instance().getAmbientOcclusion()->bindForScreenDepthPass();
 
 	// Draw non-static objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-		obj->renderToShadowMap(M);
+		if (!viewFrustum.cull(obj)) {
+			obj->renderToScreenSpaceDepthMap(P, M, V);
+		}
 	}
 
 	// Draw static objects
 	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
-		obj->renderToShadowMap(M);
+		if (!viewFrustum.cull(obj)) {
+			obj->renderToScreenSpaceDepthMap(P, M, V);
+		}
 	}
 }
 

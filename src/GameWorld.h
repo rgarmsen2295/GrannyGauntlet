@@ -20,6 +20,7 @@
 #include "PlayerInputComponent.h"
 #include "PlayerPhysicsComponent.h"
 #include "PlayerRenderComponent.h"
+#include "ViewFrustum.h"
 
 // Forward-declare the Light struct in ShaderManager.h
 struct Light;
@@ -96,7 +97,7 @@ public:
 	void renderShadowMap();
 
 	// Renders all GameObjects to the AO depth map
-	void GameWorld::renderScreenDepthMap(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
+	void GameWorld::renderScreenDepthMap(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
    // Draws a small view port to see view frustum culling
    void drawVFCViewport();
