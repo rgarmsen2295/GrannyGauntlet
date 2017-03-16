@@ -8,6 +8,7 @@
 #include "CookieActionComponent.h"
 #include "FireHydrantPhysicsComponent.h"
 #include "SkyboxRenderComponent.h"
+#include "AICarPhysicsComponent.h"
 
 // Manager headers
 #include "ResourceManager.h"
@@ -246,14 +247,31 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
    if (dynamicObjs != nullptr) {
       for (json gameObj : dynamicObjs) {
          std::shared_ptr<GameObject> dynamicGameObj =
-            createGameObject(gameObj, GameObjectType::DYNAMIC_OBJECT); 
-
+            createGameObject(gameObj, GameObjectType::DYNAMIC_OBJECT);
          dynamicGameObj->initComponents();
+
+		 if (gameObj["movement-path"] != nullptr) {
+			 std::vector<glm::vec3> parsedMovementPath;
+			 parseMovementPath(gameObj["movement-path"], &parsedMovementPath);
+			 dynamicGameObj->setMovementPath(parsedMovementPath);
+		 }
+
          world.addDynamicGameObject(dynamicGameObj);
       }
    }
 
    return 0;
+}
+
+int LevelLoader::parseMovementPath(json paths, std::vector<glm::vec3>* parsedMovementPaths) {
+	if (paths != nullptr) {
+		for (json path : paths) {
+			glm::vec3 navPoint(path["x"], path["y"], path["z"]);
+			parsedMovementPaths->push_back(navPoint);
+		}
+	}
+
+	return 0;
 }
 
 int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
@@ -355,6 +373,9 @@ PhysicsComponent* LevelLoader::getPhysicsComponent(json obj) {
       return new PlayerPhysicsComponent();
    } else if (componentName == "FireHydrantPhysicsComponent") {
       return new FireHydrantPhysicsComponent();
+   }
+   else if (componentName == "AICarPhysicsComponent") {
+	   return new AICarPhysicsComponent();
    }
 
    return nullptr;

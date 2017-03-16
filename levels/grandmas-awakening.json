@@ -525,6 +525,11 @@
          "name": "PowTextPng",
          "texture": "billboard/powtext.png",
          "random": true
+      },
+      {
+         "name": "Cartoon500",
+         "texture": "billboard/cartoon-500.png",
+         "random": false
       }
    ],
    "characters": [
@@ -3759,6 +3764,48 @@
       }
    ],
    "dynamic-objects": [
+      {
+         "object-name": "AI Car 1",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -2.33,
+            "y": 1.0,
+            "z": -54.97
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "AICarPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Lowpolycar",
+            "shader": "Default",
+            "material": "Ruby"
+         },
+         "deliverable": false,
+        "movement-path": [
+          {
+            "x": -1.33,
+            "y": 1.0,
+            "z": -53.97
+          },
+          {
+            "x": 0,
+            "y": 1.0,
+            "z": -53.97
+          }
+        ]
+      },
       {
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",

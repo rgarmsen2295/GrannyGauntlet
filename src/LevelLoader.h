@@ -27,6 +27,7 @@ private:
       nlohmann::json chars);
    int parseStaticObjects(GameWorld &world, nlohmann::json staticObjs);
    int parseDynamicObjects(GameWorld &world, nlohmann::json dynamicObjs);
+   int parseMovementPath(nlohmann::json paths, std::vector<glm::vec3>* parsedMovementPaths);
    int parseLights(GameWorld &world, nlohmann::json lightObjs);
    int parseSoundtrack(nlohmann::json soundtrackObjs);
    int parseSoundeffects(nlohmann::json soundeffectObjs);

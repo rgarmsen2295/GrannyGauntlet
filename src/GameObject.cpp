@@ -223,7 +223,7 @@ void GameObject::spawnCookieHitBillboardEffect(glm::vec3& positionOfHit, float s
 	ShapeManager& shapeManager = ShapeManager::instance();
 	ShaderManager& shaderManager = ShaderManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManager.getBillboardTexture("PowTextJpg"));
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManager.getBillboardTexture("Cartoon500"));
 	CookieHitBillboardPhysicsComponent* cookieHitbillboardPhysicsComponent = new CookieHitBillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
