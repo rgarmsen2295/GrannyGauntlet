@@ -267,6 +267,12 @@ std::shared_ptr<BoundingBox> GameObject::getBoundingBox() {
    return nullptr;
 }
 
+void GameObject::setMovementPath(std::vector<glm::vec3>& path) {
+	if (type == GameObjectType::DYNAMIC_OBJECT) {
+		movementPath_ = path;
+	}
+}
+
 void GameObject::triggerDeliveryAnimation() {
 	physics_->startDeliveryAnimation();
 }

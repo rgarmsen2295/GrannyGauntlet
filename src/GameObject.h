@@ -119,6 +119,9 @@ public:
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
     std::shared_ptr<BoundingBox> getBoundingBox();
 
+	// Sets the path that the object will follow. Only appplicable to dynamic game objects
+	void setMovementPath(std::vector<glm::vec3>& path);
+
 private:
 
     // The current position of the object in world space
@@ -156,6 +159,10 @@ private:
 
     // The fractured objects current position.
     std::shared_ptr<std::vector<glm::vec3>> fragPos_;
+
+	// The path that the object moves to over time.
+	// Once it reaches the end/beginning, it flips and follows the path backwards
+	std::vector<glm::vec3> movementPath_;
 
 };
 
