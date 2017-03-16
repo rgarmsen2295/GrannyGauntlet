@@ -4,12 +4,12 @@
       {
          "name": "Phong",
          "file-prefix": "phong",
-         "default": true
+         "default": false
       },
       {
          "name": "CookTorrance",
          "file-prefix": "cook_torr",
-         "default": false
+         "default": true
       },
       {
          "name": "Toon",
@@ -3831,7 +3831,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3861,7 +3861,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3891,7 +3891,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3921,7 +3921,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3951,7 +3951,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
