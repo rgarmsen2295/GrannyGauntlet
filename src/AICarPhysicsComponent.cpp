@@ -13,14 +13,38 @@ AICarPhysicsComponent::~AICarPhysicsComponent() {}
 void AICarPhysicsComponent::initObjectPhysics() {
 	gravity = 10.0f;
 	yVelocity = 0.0f;
+
+	// If there's a path, send the object in the direction from the first to the second point
+	if (holder_->movementPath_.size() > 1) {
+		holder_->direction = glm::normalize(holder_->movementPath_[1] - holder_->movementPath_[0]);
+		holder_->currentNavPointIndex_ = 0;
+	}
+}
+
+glm::vec3 AICarPhysicsComponent::moveAlongPath(float deltaTime) {
+	glm::vec3 oldPosition = holder_->getPosition();
+	glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *
+		holder_->direction * deltaTime);
+
+	float distanceFromPosToNav = glm::distance(oldPosition, holder_->movementPath_[holder_->currentNavPointIndex_]);
+	float distanceFromNewPosToNav = glm::distance(newPosition, holder_->movementPath_[holder_->currentNavPointIndex_]);
+
+	if (distanceFromPosToNav < distanceFromNewPosToNav) {
+		newPosition = holder_->movementPath_[holder_->currentNavPointIndex_];
+		//holder_->currentNavPointIndex_ = holder_->currentNavPointIndex_ == 0 ? 0 : 1;
+
+		//holder_->direction = glm::normalize(holder_->movementPath_[holder_->currentNavPointIndex_] - holder_->movementPath_[holder_->currentNavPointIndex_ - 1]);
+
+	}
+
+	return newPosition;
 }
 
 void AICarPhysicsComponent::updatePhysics(float deltaTime) {
 	GameWorld& world = GameManager::instance().getGameWorld();
 
 	glm::vec3 oldPosition = holder_->getPosition();
-	glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *
-		holder_->direction * deltaTime);
+	glm::vec3 newPosition = moveAlongPath(deltaTime);
 
 	newPosition += glm::vec3(0.0, yVelocity * deltaTime, 0.0);
 	holder_->setPosition(newPosition);

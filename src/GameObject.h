@@ -37,6 +37,13 @@ public:
    // Object is being fractured
    bool fracture;
 
+   // The path that the object moves to over time.
+   // Once it reaches the end/beginning, it flips and follows the path backwards
+   std::vector<glm::vec3> movementPath_;
+
+   // The index of the nav point in |movementPath_| that the object is currently going to
+   int currentNavPointIndex_;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
@@ -159,10 +166,6 @@ private:
 
     // The fractured objects current position.
     std::shared_ptr<std::vector<glm::vec3>> fragPos_;
-
-	// The path that the object moves to over time.
-	// Once it reaches the end/beginning, it flips and follows the path backwards
-	std::vector<glm::vec3> movementPath_;
 
 };
 

@@ -254,6 +254,7 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
 			 std::vector<glm::vec3> parsedMovementPath;
 			 parseMovementPath(gameObj["movement-path"], &parsedMovementPath);
 			 dynamicGameObj->setMovementPath(parsedMovementPath);
+			 std::cout << "parsed " << parsedMovementPath.size() << std::endl;
 		 }
 
          world.addDynamicGameObject(dynamicGameObj);
